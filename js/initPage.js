@@ -2,6 +2,8 @@
   //初始化第一页
   var currentNum = 0;
   var pageHash = [];
+  var cssHash = [];
+  var jsHash = [];
 
   function initFirstPage() {
     fetchPage(currentNum);
@@ -55,8 +57,6 @@
       getHtml(nextPage, url);
       pageHash.push(url)
     }
-
-    console.log(pageHash);
   }
 
   //检查页面中需要加载的js
@@ -65,8 +65,21 @@
   }
 
   //检查页面中需要加载的css
-  function checkCss() {
-
+  function checkCss(section) {
+    var url = section.childNodes[0].getAttribute('data-css');
+    //检查cssHash
+    var cssLoaded = false;
+    for (var i = 0; i < cssHash.length; i++) {
+      if (cssHash[i] == url) {
+        cssLoaded = true;
+        break;
+      }
+    }
+    if (!cssLoaded) {
+      getCss(url);
+      pageHash.push(url)
+    }
+    //console.log(url);
   }
 
   //检查页面中需要加载的图片
@@ -79,17 +92,8 @@
 
   }
 
-  //初始化向下翻页方法
-  function nextPage() {
-
-  }
-
-  //初始化向上翻页方法
-  function prevPage() {
-
-  }
-
-  //发起Ajax请求
+  /**发起Ajax请求**/
+  //请求dom
   function getHtml(dom, url) {
     var xhr;
     if (window.XMLHttpRequest) {
@@ -103,7 +107,26 @@
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         dom.innerHTML = xhr.responseText;
-        console.log(xhr.responseText)
+        //console.log(xhr.responseText);
+        //检查并加载css
+        checkCss(dom);
+      }
+    }
+  }
+  //请求css
+  function getCss(url){
+    var xhr;
+    if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest();
+    }
+    else {
+      xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhr.open("GET", url, true);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        document.getElementsByTagName('style')[0].innerHTML += xhr.response
       }
     }
   }
