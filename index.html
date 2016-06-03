@@ -3,9 +3,35 @@
 <head lang="en">
   <meta charset="UTF-8">
   <title></title>
-  <link rel="prefetch" href="./test/html/testDom1.html" />
+  <style>
+
+    /*实验性质*/
+    .transfer section {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #000;
+      float: left;
+    }
+
+    .transfer section.active {
+      border-color: red;
+    }
+  </style>
 </head>
 <body>
+
+<div class="transfer">
+  <section data-dom="test/html/testDom1.html"></section>
+  <section data-dom="test/html/testDom2.html"></section>
+  <section data-dom="test/html/testDom3.html"></section>
+  <section data-dom="test/html/testDom4.html"></section>
+</div>
+
+<!--创建等待页面-->
+<div id="loading">
+
+</div>
+
 <div class="btn-test">
   <button id="prevBtn">上一页</button>
   <button id="nextBtn">下一页</button>
