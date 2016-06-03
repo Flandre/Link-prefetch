@@ -1,10 +1,6 @@
 (function () {
   //初始化第一页
-  var currentNum = 0;
-  var pageHash = [];
-  var cssHash = [];
-  var jsHash = [];
-  var jsCatch = [];
+  var currentNum = 0, pageHash = [], cssHash = [], jsHash = [], jsCatch = [];
 
   function initFirstPage() {
     fetchPage(currentNum);
@@ -165,7 +161,6 @@
     xhr.send();
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        alert(xhr.response);
         jsCatch.push(xhr.responseText);
         console.log(jsCatch);
       }
