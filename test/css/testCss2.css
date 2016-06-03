@@ -1,0 +1,3 @@
+body:before{
+    content: '已加载第二个style';
+}

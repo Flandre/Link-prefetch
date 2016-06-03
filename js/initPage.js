@@ -4,12 +4,17 @@
   var pageHash = [];
 
   function initFirstPage() {
+    fetchNextPage(-1);
     showCurrentPage(currentNum);
     fetchNextPage(currentNum);
+
     //追加翻页方法
     document.getElementById('nextBtn').onclick = function () {
-      currentNum++;
-      fetchNextPage(currentNum);
+      if(document.getElementsByTagName('section').length-1 > currentNum){
+        currentNum++;
+        fetchNextPage(currentNum);
+      }
+      showCurrentPage(currentNum);
     }
   }
 
@@ -20,16 +25,27 @@
       sectionArr[i].removeAttribute('class')
     }
     var currentPage = sectionArr[current];
-    getHtml(currentPage, currentPage.getAttribute('data-dom'));
     currentPage.setAttribute('class', 'active');
   }
 
   //加载下一页内容
   function fetchNextPage(current) {
     var nextPage = document.getElementsByTagName('section')[current + 1];
-    getHtml(nextPage, nextPage.getAttribute('data-dom'));
+    var url = nextPage.getAttribute('data-dom');
+    var pageLoaded = false;
+    //查看页面是否已经加载过
+    for (var i = 0; i < pageHash.length; i++) {
+      if(pageHash[i] == url){
+        pageLoaded = true;
+        break;
+      }
+    }
+    if (!pageLoaded) {
+      getHtml(nextPage, url);
+      pageHash.push(url)
+    }
 
-
+    console.log(pageHash);
   }
 
   //检查页面中需要加载的js
