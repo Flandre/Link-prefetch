@@ -4,17 +4,28 @@
   var pageHash = [];
 
   function initFirstPage() {
-    fetchNextPage(-1);
+    fetchPage(currentNum);
     showCurrentPage(currentNum);
-    fetchNextPage(currentNum);
+    fetchPage(currentNum + 1);
 
-    //追加翻页方法
+    //绑定向下翻页方法
     document.getElementById('nextBtn').onclick = function () {
-      if(document.getElementsByTagName('section').length-1 > currentNum){
+      if (document.getElementsByTagName('section').length - 1 > currentNum) {
         currentNum++;
-        fetchNextPage(currentNum);
+        if (document.getElementsByTagName('section').length - 1 > currentNum) {
+          fetchPage(currentNum + 1);
+        }
       }
       showCurrentPage(currentNum);
+      console.log(currentNum);
+    };
+
+    //绑定向上翻页方法
+    document.getElementById('prevBtn').onclick = function () {
+      if (currentNum > 0) {
+        currentNum--;
+        showCurrentPage(currentNum);
+      }
     }
   }
 
@@ -29,13 +40,13 @@
   }
 
   //加载下一页内容
-  function fetchNextPage(current) {
-    var nextPage = document.getElementsByTagName('section')[current + 1];
+  function fetchPage(next) {
+    var nextPage = document.getElementsByTagName('section')[next];
     var url = nextPage.getAttribute('data-dom');
     var pageLoaded = false;
     //查看页面是否已经加载过
     for (var i = 0; i < pageHash.length; i++) {
-      if(pageHash[i] == url){
+      if (pageHash[i] == url) {
         pageLoaded = true;
         break;
       }
