@@ -103,6 +103,7 @@
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         dom.innerHTML = xhr.responseText;
+        console.log(xhr.responseText)
       }
     }
   }
