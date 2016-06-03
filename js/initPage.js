@@ -166,6 +166,5 @@
       }
     }
   }
-
   initFirstPage();
 })(window);
