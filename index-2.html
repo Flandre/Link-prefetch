@@ -6,27 +6,26 @@
   <style>
 
     /*实验性质*/
-    .transfer section {
+    main section {
       width: 200px;
       height: 200px;
       border: 1px solid #000;
       float: left;
     }
 
-    .transfer section.active {
+    main section.active {
       border-color: red;
     }
   </style>
   <script></script>
 </head>
 <body>
-
-<div class="transfer">
+<main>
   <section data-dom="test/html/testDom1.html"></section>
   <section data-dom="test/html/testDom2.html"></section>
   <section data-dom="test/html/testDom3.html"></section>
   <section data-dom="test/html/testDom4.html"></section>
-</div>
+</main>
 
 <!--创建等待页面-->
 <div id="loading">
@@ -37,7 +36,7 @@
   <button id="prevBtn">上一页</button>
   <button id="nextBtn">下一页</button>
 </div>
-
-<script src="js/initPage.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.initPage.js"></script>
 </body>
 </html>
