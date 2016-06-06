@@ -1,12 +1,14 @@
-var cssCatch = [], jsCatch = [], cssHash = {}, jsHash = {}, pageHash = {};
+var cssHash = {}, jsHash = {}, pageHash = {};
 //当前页数
 var currentPage = 0;
 //初始化首页
+
+var firstLoad = true;
 function initFirstPage() {
   //处理加载第一页
-  var totalPage = $('section', 'main').length;
   fetchPage(currentPage);
-  showCurrentPage(currentPage, totalPage);
+
+  //showCurrentPage(currentPage);
   //添加向下翻页
   $('#nextBtn').on('click', nextPage);
   $('#prevBtn').on('click', prevPage);
@@ -38,22 +40,39 @@ function showCurrentPage(current) {
   if (current + 1 < total) {
     fetchPage(current + 1)
   }
+  var cssUrl = $('section:eq(' + current + ') div:first', 'main').attr('data-css');
+  if(cssHash[cssUrl]){
+    $('#cssFetch').html(cssHash[cssUrl].cssBody)
+  }
 }
 
 //预加载下一页
 function fetchPage(next) {
-  console.log(next);
   var nextPage = $('section:eq(' + next + ')', 'main'),
-  url = nextPage.attr('data-dom');
+    url = nextPage.attr('data-dom');
   //判断页面有没有加载过
-  if(!pageHash[url]){
-    getSource(url, 'html', function(data){
-      console.log(data);
-      nextPage.html(data)
+  if (!pageHash[url]) {
+    getSource(url, 'html', function (data) {
+      nextPage.html(data);
+      //加载本页需要的css
+      fetchCss(next);
+      pageHash[url] = true;
     });
-    pageHash[url] = true;
-    console.log(pageHash)
   }
+}
+//预加载页面中需要的css
+function fetchCss(index) {
+  var cssUrl = $('section:eq(' + index + ') div:first', 'main').attr('data-css');
+  if (cssUrl && (!cssHash[cssUrl] ? true : !cssHash[cssUrl].fatch)) {
+    getSource(cssUrl, 'text', function (data) {
+      cssHash[cssUrl] = {
+        fatch: true,
+        cssBody: data
+      };
+      console.log(cssHash);
+    });
+  }
+  console.log((!cssHash[cssUrl] ? true : !cssHash[cssUrl].fatch))
 }
 
 //发起ajax请求
