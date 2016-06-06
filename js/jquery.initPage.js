@@ -57,7 +57,7 @@ function showCurrentPage(current) {
   }
   var jsUrl = $('section:eq(' + current + ') div:first', 'main').attr('data-js');
   if(jsHash[jsUrl]){
-    //$('#jsFetch').html(jsHash[jsUrl].jsBody)
+    //在当前页时执行当前页绑定的js
     eval(jsHash[jsUrl].jsBody);
   }
 }
