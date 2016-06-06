@@ -1,12 +1,23 @@
 var cssHash = {}, jsHash = {}, pageHash = {};
+var sourceStatus = {
+  page: false,
+  css: false,
+  js: false
+};
 //当前页数
 var currentPage = 0;
 //初始化首页
-
-var firstLoad = true;
 function initFirstPage() {
   //处理加载第一页
   fetchPage(currentPage);
+  /*暂时仅对第一个页面进行缓冲*/
+  (function pageBuffer(){
+    if(sourceStatus.css && sourceStatus.js){
+      showCurrentPage(currentPage);
+    }else{
+      setTimeout(pageBuffer,10)
+    }
+  })();
 
   //showCurrentPage(currentPage);
   //添加向下翻页
@@ -44,6 +55,11 @@ function showCurrentPage(current) {
   if(cssHash[cssUrl]){
     $('#cssFetch').html(cssHash[cssUrl].cssBody)
   }
+  var jsUrl = $('section:eq(' + current + ') div:first', 'main').attr('data-js');
+  if(jsHash[jsUrl]){
+    //$('#jsFetch').html(jsHash[jsUrl].jsBody)
+    eval(jsHash[jsUrl].jsBody);
+  }
 }
 
 //预加载下一页
@@ -56,12 +72,16 @@ function fetchPage(next) {
       nextPage.html(data);
       //加载本页需要的css
       fetchCss(next);
+      //加载本页需要的js
+      fetchJs(next);
       pageHash[url] = true;
     });
   }
 }
 //预加载页面中需要的css
 function fetchCss(index) {
+  sourceStatus.css = false;
+  console.log(JSON.stringify(sourceStatus));
   var cssUrl = $('section:eq(' + index + ') div:first', 'main').attr('data-css');
   if (cssUrl && (!cssHash[cssUrl] ? true : !cssHash[cssUrl].fatch)) {
     getSource(cssUrl, 'text', function (data) {
@@ -69,10 +89,32 @@ function fetchCss(index) {
         fatch: true,
         cssBody: data
       };
-      console.log(cssHash);
+      sourceStatus.css = true;
     });
+  }else{
+    sourceStatus.css = true;
+    console.log('---未请求css---');
   }
-  console.log((!cssHash[cssUrl] ? true : !cssHash[cssUrl].fatch))
+}
+//预加载页面中需要的js
+function fetchJs(index) {
+  sourceStatus.js = false;
+  console.log(JSON.stringify(sourceStatus));
+  var jsUrl = $('section:eq(' + index + ') div:first', 'main').attr('data-js');
+  if (jsUrl && (!jsHash[jsUrl] ? true : !jsHash[jsUrl].fatch)) {
+    getSource(jsUrl, 'text', function (data) {
+      jsHash[jsUrl] = {
+        fatch: true,
+        jsBody: data
+      };
+      sourceStatus.js = true;
+      //console.log(JSON.stringify(sourceStatus));
+    });
+  }else{
+    sourceStatus.js = true;
+    console.log('---未请求js---');
+    //console.log(JSON.stringify(sourceStatus));
+  }
 }
 
 //发起ajax请求
