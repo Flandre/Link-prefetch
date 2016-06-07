@@ -11,12 +11,13 @@ function initFirstPage() {
     if(pageStatus[0]){
       if(pageStatus[0].css && pageStatus[0].js && !pageStatus[0].imgRest){
         showCurrentPage(currentPage);
+        //首页加载完成后显示，之后不再显示loading页面
         $('#loading').hide()
       }else{
-        setTimeout(pageBuffer,10);//可以在此处追加loading页面
+        setTimeout(pageBuffer,10);
       }
     }else{
-      setTimeout(pageBuffer,10);//可以在此处追加loading页面
+      setTimeout(pageBuffer,10);
     }
   })();
 
