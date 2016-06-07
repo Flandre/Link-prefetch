@@ -44,6 +44,40 @@
       top: 0;
       background-color: #fff;
     }
+
+    #loading{
+      display: block;
+      background: #222;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      text-align: center;
+    }
+    #loading .loading-box{
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      margin-top:25%;
+    }
+
+    #loading span{
+      font-size:30px;
+      font-weight: bold;
+      color: #fff;
+      line-height: 100%;
+    }
+    #loading .loading-bg{
+      display: block;
+      position: absolute;
+      z-index: 1000;
+      width: 100px;
+      height: 100px;
+      background: url('test/img/loading.svg');
+    }
+
+
   </style>
   <style id="cssFetch"></style>
 </head>
@@ -53,12 +87,15 @@
   <section data-dom="test/html/testDom2.html"></section>
   <section data-dom="test/html/testDom3.html"></section>
   <section data-dom="test/html/testDom4.html"></section>
+  <!--创建等待页面-->
+  <div id="loading">
+    <div class="loading-box">
+      <div class="loading-bg"></div>
+      <!--span>loading</span-->
+    </div>
+  </div>
 </main>
 
-<!--创建等待页面-->
-<div id="loading">
-  <span style="font-size:20px;font-weight: bold;">loading</span>
-</div>
 
 <div class="btn-test">
   <button id="prevBtn">上一页</button>

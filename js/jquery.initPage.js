@@ -11,6 +11,7 @@ function initFirstPage() {
     if(pageStatus[0]){
       if(pageStatus[0].css && pageStatus[0].js && !pageStatus[0].imgRest){
         showCurrentPage(currentPage);
+        $('#loading').hide()
       }else{
         setTimeout(pageBuffer,10);//可以在此处追加loading页面
       }
