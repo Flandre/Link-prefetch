@@ -116,15 +116,19 @@ function fetchJs(index) {
 }
 //预加载页面中需要的图片
 function fetchImg(index){
-  $('img', 'section:eq(' + index + ')').each(function(){
-    var imgDom = $(this);
-    var img = new Image();
-    img.src = $(this).attr('data-src');
-    img.onload = function(){
-      console.log('加载图片')
-      imgDom.attr('src',imgDom.attr('data-src'));
-    }
+  $('img', 'section:eq(' + index + ')').each(function(count){
+    getImage(count, index)
   });
+}
+function getImage(count, index){
+  console.log(count +','+index)
+  var imgDom = $('img:eq(' + count + ')', 'section:eq(' + index + ')');
+  var img = new Image();
+  img.src = imgDom.attr('data-src');
+  img.onload = function(){
+    console.log('加载图片');
+    imgDom.attr('src',imgDom.attr('data-src'));
+  }
 }
 
 //发起ajax请求

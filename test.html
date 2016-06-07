@@ -6,27 +6,32 @@
 </head>
 <body>
 
-<img src="" data-src="test/img/001.jpg">
+<img src="" data-src="test/img/001.jpg" id="testImg">
 <img src="" data-src="test/img/002.jpg">
 <script src="js/jquery.min.js"></script>
 <script>
-  $('img').each(function(){
-    getSource($(this).attr('data-src'), '',function(data){
-      console.log(data)
-    })
-    /*var imgDom = $(this);
+  /*for(var i = 0; i < $('img').length; i++){
+    foo(i);
+  }*/
+  $('img').each(function(index,element){
+    foo(index,element)
+  });
+  function foo(index,element){
+    console.log(element)
+    var imgDom = $('img:eq(' + index + ')');
     var img = new Image();
-    img.src = $(this).attr('data-src');
+    img.src = imgDom.attr('data-src');
     img.onload = function(){
-      //alert(imgDom.attr('data-src'));
+      console.log('时空笨蛋');
       imgDom.attr('src',imgDom.attr('data-src'));
       //alert(2)
-    }*/
+    }
+  }
 
-  });
+  //});
 
   //发起ajax请求
-  function getSource(url, type, func) {
+  /*function getSource(url, type, func) {
     $.get({
       url: url,
       dataType: type,
@@ -48,7 +53,7 @@
     } else {
       // 不能计算进度
     }
-  }
+  }*/
 </script>
 </body>
 </html>
