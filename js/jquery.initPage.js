@@ -9,7 +9,7 @@ function initFirstPage() {
   /*暂时仅对第一个页面进行缓冲*/
   (function pageBuffer(){
     if(pageStatus[0]){
-      if(pageStatus[0].css && pageStatus[0].js){
+      if(pageStatus[0].css && pageStatus[0].js && !pageStatus[0].imgRest){
         showCurrentPage(currentPage);
       }else{
         setTimeout(pageBuffer,10);//可以在此处追加loading页面
@@ -27,9 +27,10 @@ function initFirstPage() {
 /*翻页事件*/
 //向下翻页
 function nextPage() {
+  console.log(JSON.stringify(pageStatus));
   //如果下一页没加载完则阻止向下翻页
   if(pageStatus[currentPage + 1]){
-    if(pageStatus[currentPage + 1].css && pageStatus[currentPage + 1].js){
+    if(pageStatus[currentPage + 1].css && pageStatus[currentPage + 1].js && !pageStatus[currentPage + 1].imgRest){
       var totalPage = $('section', 'main').length;
       if (currentPage + 1 < totalPage) {
         currentPage++;
@@ -77,7 +78,8 @@ function fetchPage(next) {
       //添加加载状态
       pageStatus[next] = {
         css: false,
-        js: false
+        js: false,
+        imgRest: Infinity
       };
       //加载本页需要的css
       fetchCss(next);
@@ -123,6 +125,8 @@ function fetchJs(index) {
 }
 //预加载页面中需要的图片
 function fetchImg(index){
+  //初始化剩余图片
+  pageStatus[index].imgRest = $('img', 'section:eq(' + index + ')').length;
   $('img', 'section:eq(' + index + ')').each(function(count){
     getImage(count, index)
   });
@@ -134,6 +138,7 @@ function getImage(count, index){
   img.onload = function(){
     console.log('加载图片');
     imgDom.attr('src',imgDom.attr('data-src'));
+    pageStatus[index].imgRest --;
   }
 }
 
