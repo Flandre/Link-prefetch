@@ -74,6 +74,8 @@ function fetchPage(next) {
       fetchCss(next);
       //加载本页需要的js
       fetchJs(next);
+      //加载本页需要的图片
+      fetchImg(next);
       pageHash[url] = true;
     });
   }
@@ -81,7 +83,6 @@ function fetchPage(next) {
 //预加载页面中需要的css
 function fetchCss(index) {
   sourceStatus.css = false;
-  console.log(JSON.stringify(sourceStatus));
   var cssUrl = $('section:eq(' + index + ') div:first', 'main').attr('data-css');
   if (cssUrl && (!cssHash[cssUrl] ? true : !cssHash[cssUrl].fatch)) {
     getSource(cssUrl, 'text', function (data) {
@@ -99,7 +100,6 @@ function fetchCss(index) {
 //预加载页面中需要的js
 function fetchJs(index) {
   sourceStatus.js = false;
-  console.log(JSON.stringify(sourceStatus));
   var jsUrl = $('section:eq(' + index + ') div:first', 'main').attr('data-js');
   if (jsUrl && (!jsHash[jsUrl] ? true : !jsHash[jsUrl].fatch)) {
     getSource(jsUrl, 'text', function (data) {
@@ -108,13 +108,23 @@ function fetchJs(index) {
         jsBody: data
       };
       sourceStatus.js = true;
-      //console.log(JSON.stringify(sourceStatus));
     });
   }else{
     sourceStatus.js = true;
     console.log('---未请求js---');
-    //console.log(JSON.stringify(sourceStatus));
   }
+}
+//预加载页面中需要的图片
+function fetchImg(index){
+  $('img', 'section:eq(' + index + ')').each(function(){
+    var imgDom = $(this);
+    var img = new Image();
+    img.src = $(this).attr('data-src');
+    img.onload = function(){
+      console.log('加载图片')
+      imgDom.attr('src',imgDom.attr('data-src'));
+    }
+  });
 }
 
 //发起ajax请求
