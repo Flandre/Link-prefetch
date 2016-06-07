@@ -1,9 +1,5 @@
 var cssHash = {}, jsHash = {}, pageHash = {};
-var sourceStatus = {
-  page: false,
-  css: false,
-  js: false
-};
+var pageStatus = [];
 //当前页数
 var currentPage = 0;
 //初始化首页
@@ -12,14 +8,17 @@ function initFirstPage() {
   fetchPage(currentPage);
   /*暂时仅对第一个页面进行缓冲*/
   (function pageBuffer(){
-    if(sourceStatus.css && sourceStatus.js){
-      showCurrentPage(currentPage);
+    if(pageStatus[0]){
+      if(pageStatus[0].css && pageStatus[0].js){
+        showCurrentPage(currentPage);
+      }else{
+        setTimeout(pageBuffer,10);//可以在此处追加loading页面
+      }
     }else{
-      setTimeout(pageBuffer,10)
+      setTimeout(pageBuffer,10);//可以在此处追加loading页面
     }
   })();
 
-  //showCurrentPage(currentPage);
   //添加向下翻页
   $('#nextBtn').on('click', nextPage);
   $('#prevBtn').on('click', prevPage);
@@ -28,11 +27,16 @@ function initFirstPage() {
 /*翻页事件*/
 //向下翻页
 function nextPage() {
-  var totalPage = $('section', 'main').length;
-  if (currentPage + 1 < totalPage) {
-    currentPage++;
+  //如果下一页没加载完则阻止向下翻页
+  if(pageStatus[currentPage + 1]){
+    if(pageStatus[currentPage + 1].css && pageStatus[currentPage + 1].js){
+      var totalPage = $('section', 'main').length;
+      if (currentPage + 1 < totalPage) {
+        currentPage++;
+      }
+      showCurrentPage(currentPage)
+    }
   }
-  showCurrentPage(currentPage)
 }
 //向上翻页
 function prevPage() {
@@ -70,6 +74,11 @@ function fetchPage(next) {
   if (!pageHash[url]) {
     getSource(url, 'html', function (data) {
       nextPage.html(data);
+      //添加加载状态
+      pageStatus[next] = {
+        css: false,
+        js: false
+      };
       //加载本页需要的css
       fetchCss(next);
       //加载本页需要的js
@@ -82,7 +91,6 @@ function fetchPage(next) {
 }
 //预加载页面中需要的css
 function fetchCss(index) {
-  sourceStatus.css = false;
   var cssUrl = $('section:eq(' + index + ') div:first', 'main').attr('data-css');
   if (cssUrl && (!cssHash[cssUrl] ? true : !cssHash[cssUrl].fatch)) {
     getSource(cssUrl, 'text', function (data) {
@@ -90,16 +98,15 @@ function fetchCss(index) {
         fatch: true,
         cssBody: data
       };
-      sourceStatus.css = true;
+      pageStatus[index].css = true;
     });
   }else{
-    sourceStatus.css = true;
     console.log('---未请求css---');
+    pageStatus[index].css = true;
   }
 }
 //预加载页面中需要的js
 function fetchJs(index) {
-  sourceStatus.js = false;
   var jsUrl = $('section:eq(' + index + ') div:first', 'main').attr('data-js');
   if (jsUrl && (!jsHash[jsUrl] ? true : !jsHash[jsUrl].fatch)) {
     getSource(jsUrl, 'text', function (data) {
@@ -107,11 +114,11 @@ function fetchJs(index) {
         fatch: true,
         jsBody: data
       };
-      sourceStatus.js = true;
+      pageStatus[index].js = true;
     });
   }else{
-    sourceStatus.js = true;
     console.log('---未请求js---');
+    pageStatus[index].js = true;
   }
 }
 //预加载页面中需要的图片
@@ -121,7 +128,6 @@ function fetchImg(index){
   });
 }
 function getImage(count, index){
-  console.log(count +','+index)
   var imgDom = $('img:eq(' + count + ')', 'section:eq(' + index + ')');
   var img = new Image();
   img.src = imgDom.attr('data-src');
