@@ -20,12 +20,31 @@ function initFirstPage() {
       setTimeout(pageBuffer,10);
     }
   })();
-
+  pageClip();
   //添加向下翻页
   $('#nextBtn').on('click', nextPage);
   $('#prevBtn').on('click', prevPage);
 }
-
+//添加交互
+var y1,y2;
+function pageClip(){
+  var hasTouch = 'ontouchstart' in window ? true : false,
+      touchStart = hasTouch ? 'touchstart' : 'mousedown',
+      touchMove = hasTouch ? 'touchmove' : 'mousemove',
+      touchEnd = hasTouch ? 'touchend' : 'mouseup';
+  $('main')[0].addEventListener(touchStart, function(e){
+    e.preventDefault();
+    y1 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
+    $('main')[0].addEventListener(touchEnd, function(e){
+      y2 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
+      if(y2 > y1){
+        prevPage()
+      }else{
+        nextPage()
+      }
+    })
+  })
+}
 /*翻页事件*/
 //向下翻页
 function nextPage() {
