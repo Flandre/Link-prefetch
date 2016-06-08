@@ -10,5 +10,6 @@
     "grunt-contrib-copy": "^0.8.2"
   },
   "dependencies": {
+    "jquery": "^2.2.3"
   }
 }
