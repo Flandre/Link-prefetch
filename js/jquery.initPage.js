@@ -34,16 +34,21 @@ function pageClip(){
       touchEnd = hasTouch ? 'touchend' : 'mouseup';
   $('main')[0].addEventListener(touchStart, function(e){
     e.preventDefault();
+    $('main')[0].addEventListener(touchMove,touchMoveHandler);
     y1 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
-    $('main')[0].addEventListener(touchEnd, function(e){
-      y2 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
-      if(y2 > y1){
-        prevPage()
-      }else{
-        nextPage()
-      }
-    })
-  })
+  });
+  $('main')[0].addEventListener(touchEnd, function(e){
+    e.preventDefault();
+    $('main')[0].removeEventListener(touchMove,touchMoveHandler);
+    if(y2 > y1){
+      prevPage()
+    }else{
+      nextPage()
+    }
+  });
+  function touchMoveHandler(e){
+    y2 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
+  }
 }
 /*翻页事件*/
 //向下翻页
