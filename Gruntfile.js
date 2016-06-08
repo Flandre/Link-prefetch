@@ -8,8 +8,8 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     copy: {
       jquery: {
-        src:'node_modules/jquery/dist/jquery.min.js',
-        dest:'js/jquery.min.js'
+        src: 'node_modules/jquery/dist/jquery.min.js',
+        dest: 'js/jquery.min.js'
       }
     },
     connect: {
@@ -25,5 +25,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
-  grunt.registerTask('default', ['connect']);
+  grunt.registerTask('default', ['copy', 'connect']);
 };
