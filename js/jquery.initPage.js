@@ -28,8 +28,8 @@ function initFirstPage() {
 //添加交互
 var y1, y2;
 function pageClip() {
-  var prevPageObj, nextPageObj;
-  var mainHeight = $('main').height();
+  //var prevPageObj, nextPageObj;
+  //var mainHeight = $('main').height();
   var hasTouch = 'ontouchstart' in window ? true : false,
     touchStart = hasTouch ? 'touchstart' : 'mousedown',
     touchMove = hasTouch ? 'touchmove' : 'mousemove',
@@ -37,7 +37,7 @@ function pageClip() {
   $('main')[0].addEventListener(touchStart, function (e) {
     e.preventDefault();
     //设置前一页和后一页
-    if (currentPage > 0) {
+    /*if (currentPage > 0) {
       prevPageObj = $('section:eq(' + (currentPage - 1) + ')', 'main');
       console.log(prevPageObj);
       prevPageObj.css({'top': -mainHeight, 'z-index': '100'});
@@ -45,7 +45,7 @@ function pageClip() {
     if (currentPage < $('section').length - 1) {
       nextPageObj = $('section:eq(' + (currentPage + 1) + ')', 'main');
       nextPageObj.css({'top': mainHeight, 'z-index': '100'});
-    }
+    }*/
 
     $('main')[0].addEventListener(touchMove, touchMoveHandler);
     y1 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
