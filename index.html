@@ -55,13 +55,11 @@
       text-align: center;
     }
     #loading .loading-box{
-      position: relative;
-      width: 100px;
-      height: 100px;
-      margin: 0 auto;
-      margin-top:25%;
+      position: fixed;
+      top:20%;
+      width: 100%;
+      height: 100px;;
     }
-
     #loading span{
       font-size:30px;
       font-weight: bold;
@@ -70,11 +68,10 @@
     }
     #loading .loading-bg{
       display: block;
-      position: absolute;
-      z-index: 1000;
       width: 100px;
       height: 100px;
       background: url('test/img/loading.svg');
+      margin: 0 auto;
     }
 
 
@@ -101,7 +98,7 @@
   <button id="prevBtn">上一页</button>
   <button id="nextBtn">下一页</button>
 </div>
-<script src="test/js/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/jquery.initPage.js"></script>
 </body>
 </html>
