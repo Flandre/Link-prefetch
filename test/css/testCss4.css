@@ -1,3 +1,3 @@
-body:before{
+select.active:before{
     content: '已加载第四个style';
 }
