@@ -76,7 +76,7 @@ function nextPage() {
         $('section:eq(' + currentPage + ')', 'main').addClass('scroll-up');
         setTimeout(function () {
             showCurrentPage(currentPage)
-          }, 2000
+          }, 1000
         )
       }
     }
@@ -89,7 +89,7 @@ function prevPage() {
     $('section:eq(' + currentPage + ')', 'main').addClass('scroll-down');
     setTimeout(function () {
         showCurrentPage(currentPage)
-      }, 2000
+      }, 1000
     )
   }
 }
