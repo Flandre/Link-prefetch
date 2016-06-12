@@ -1,3 +1,6 @@
-select.active:before{
+section.active:before{
     content: '已加载第二个style';
+    position: absolute;
+    z-index: 100;
+    bottom: 0;
 }

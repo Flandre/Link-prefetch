@@ -9,19 +9,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title></title>
   <style>
-    /*实验性质*/
-    main section {
-      overflow: hidden;
-      top: 100%;
-      transition: 1s;
-    }
-
-    main section.active {
-      /*border-color: red;*/
-      top: 0;
-     /* z-index: 99;*/
-    }
-
     /*显示用*/
     * {
       padding: 0;
@@ -40,11 +27,18 @@
       overflow: hidden;
     }
 
+
     main > section {
       width: 100%;
       height: 100%;
       position: absolute;
       z-index:9;
+      overflow: hidden;
+      top: 0;
+    }
+
+    main section.active {
+      z-index: 99;
     }
 
     main > section > div {
@@ -55,6 +49,28 @@
       background-color: #fff;
     }
 
+    .scroll-up{
+      z-index:999;
+      animation:pageScrollUp 1s;
+    }
+
+    .scroll-down{
+      z-index:999;
+      animation:pageScrollDown 1s;
+    }
+
+    @keyframes pageScrollUp
+    {
+      from {top:100%;}
+      to {top:0;}
+    }
+
+    @keyframes pageScrollDown
+    {
+      from {top:-100%;}
+      to {top:0;}
+    }
+    /*loading样式*/
     #loading {
       display: block;
       background: #222;

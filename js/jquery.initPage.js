@@ -38,14 +38,14 @@ function pageClip() {
     e.preventDefault();
     //设置前一页和后一页
     /*if (currentPage > 0) {
-      prevPageObj = $('section:eq(' + (currentPage - 1) + ')', 'main');
-      console.log(prevPageObj);
-      prevPageObj.css({'top': -mainHeight, 'z-index': '100'});
-    }
-    if (currentPage < $('section').length - 1) {
-      nextPageObj = $('section:eq(' + (currentPage + 1) + ')', 'main');
-      nextPageObj.css({'top': mainHeight, 'z-index': '100'});
-    }*/
+     prevPageObj = $('section:eq(' + (currentPage - 1) + ')', 'main');
+     console.log(prevPageObj);
+     prevPageObj.css({'top': -mainHeight, 'z-index': '100'});
+     }
+     if (currentPage < $('section').length - 1) {
+     nextPageObj = $('section:eq(' + (currentPage + 1) + ')', 'main');
+     nextPageObj.css({'top': mainHeight, 'z-index': '100'});
+     }*/
 
     $('main')[0].addEventListener(touchMove, touchMoveHandler);
     y1 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
@@ -73,8 +73,12 @@ function nextPage() {
       var totalPage = $('section', 'main').length;
       if (currentPage + 1 < totalPage) {
         currentPage++;
+        $('section:eq(' + currentPage + ')', 'main').addClass('scroll-up');
+        setTimeout(function () {
+            showCurrentPage(currentPage)
+          }, 1000
+        )
       }
-      showCurrentPage(currentPage)
     }
   }
 }
@@ -82,13 +86,19 @@ function nextPage() {
 function prevPage() {
   if (currentPage > 0) {
     currentPage--;
+    $('section:eq(' + currentPage + ')', 'main').addClass('scroll-down');
+    setTimeout(function () {
+        showCurrentPage(currentPage)
+      }, 1000
+    )
   }
-  showCurrentPage(currentPage)
 }
 
 //显示当前页面
 function showCurrentPage(current) {
   var total = $('section', 'main').length;
+  $('section', 'main').removeClass('scroll-up');
+  $('section', 'main').removeClass('scroll-down');
   $('section', 'main').removeClass('active');
   $('section:eq(' + current + ')', 'main').addClass('active');
   //判断还有没有下一页,如果有则加载下一页
