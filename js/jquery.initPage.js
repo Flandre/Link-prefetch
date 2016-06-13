@@ -101,6 +101,8 @@ function showCurrentPage(current) {
   $('section', 'main').removeClass('scroll-down');
   $('section', 'main').removeClass('active');
   $('section:eq(' + current + ')', 'main').addClass('active');
+  //执行css动画序列
+  animationOrder(current);
   //判断还有没有下一页,如果有则加载下一页
   if (current + 1 < total) {
     fetchPage(current + 1)
@@ -188,6 +190,18 @@ function getImage(count, index) {
     console.log('加载图片');
     imgDom.attr('src', imgDom.attr('data-src'));
     pageStatus[index].imgRest--;
+  }
+}
+
+//序列化css动画
+function animationOrder(index){
+  $('.animation-element').attr('class','animation-element');
+  var animationGroup = $('.animation-element', 'section:eq(' + index + ')');
+  //console.log(animationGroup.length)
+  for(var i = 0; i < animationGroup.length; i ++){
+    var domQuery = $(animationGroup[i]);
+    domQuery.css('animation-delay', 1.5 * (domQuery.attr('data-animation-level') - 1) + 's');
+    domQuery.addClass(domQuery.attr('data-animation'))
   }
 }
 
