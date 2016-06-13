@@ -5,6 +5,9 @@
 ###TEST
 
 > 这是标记文字
+> >asdfasdfasdfasd
+> 
+>>adfadsfasdfdas
 
 *adadf*
 
@@ -24,6 +27,23 @@ asdfasdfasdfasd
     - 功能3
 
 
-	`function(){
+	```bash
+function(){
+sfdgsdfg
 			aaaaa
-}`
+}```
+
+*adadf*
+**aaaa**
+***aaaaa***
+
+	function
+	aaa
+	int
+
+```json
+
+{
+  "/Absolute/path/to/other/destination": true
+}
+```
