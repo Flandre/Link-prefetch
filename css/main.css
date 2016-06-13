@@ -1,6 +1,6 @@
 /*测试动画*/
 /**默认动画效果**/
-*{animation-timing-function: ease-out;animation-duration:1.5s}
+*{animation-timing-function: ease-out;animation-duration:1.5s;animation-fill-mode:both;}
 
 section .slip-left{display:none;}
 section.active .slip-left{display:block;animation-name:slipLeft}
