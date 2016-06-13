@@ -37,13 +37,38 @@ sfdgsdfg
 **aaaa**
 ***aaaaa***
 
+
+
 	function
 	aaa
 	int
+
+
 
 ```json
 
 {
   "/Absolute/path/to/other/destination": true
+}
+```
+
+```javascript
+
+function nextPage() {
+  console.log(JSON.stringify(pageStatus));
+  //如果下一页没加载完则阻止向下翻页
+  if (pageStatus[currentPage + 1]) {
+    if (pageStatus[currentPage + 1].css && pageStatus[currentPage + 1].js && !pageStatus[currentPage + 1].imgRest) {
+      var totalPage = $('section', 'main').length;
+      if (currentPage + 1 < totalPage) {
+        currentPage++;
+        $('section:eq(' + currentPage + ')', 'main').addClass('scroll-up');
+        setTimeout(function () {
+            showCurrentPage(currentPage)
+          }, 1000
+        )
+      }
+    }
+  }
 }
 ```
