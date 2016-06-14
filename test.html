@@ -3,23 +3,51 @@
 <head lang="en">
   <meta charset="UTF-8">
   <title></title>
-  <link href="css/main.css">
+  <link href="css/main.css" rel="stylesheet">
+  <link href="css/animate.min.css" rel="stylesheet">
+  <style>
+  </style>
 </head>
 <body>
 
 <img src="" data-src="test/img/001.jpg" id="testImg">
 <img src="" data-src="test/img/002.jpg">
 
-<p class="effect" data-an="slip-left 1.5s" id="p1">这是一段文字</p>
-<p class="effect" data-an="slip-right 1.5s" data-an-depends="p1" id="p2">这是一段文字</p>
-<p class="effect" data-an="slip-left 1.5s" data-an-depends="p2" id="p3">这是一段文字</p>
-<p class="effect" data-an="slip-left 1.5s" data-an-depends="p3">这是一段文字</p>
+<p class="effect" data-an="slideInLeft 1s" id="p1">这是一段文字</p>
 
-<script src="test/js/jquery.min.js"></script>
+<p class="effect" data-an="slideInLeft 2s" data-an-depends="p1" id="p2">这是一段文字</p>
+
+<p class="effect" data-an="slideInLeft 3s" data-an-depends="p2" id="p3">这是一段文字</p>
+
+<p class="effect" data-an="slideInLeft 4s" data-an-depends="p3">这是一段文字</p>
+
+<botton id="btn">执行</botton>
+<script src="js/jquery.min.js"></script>
 <script>
- function runAnimate(){
-
- }
+  var startAnimateArr = [];
+  $('.effect').each(function () {
+    //预处理效果
+    $(this).css('visibility', 'hidden');
+    if (!$(this).attr('data-an-depends')) {
+      startAnimateArr.push($(this))
+    }
+  });
+  console.log(startAnimateArr);
+  $('#btn').on('click',function(){
+    for (var i = 0; i < startAnimateArr.length; i++) {
+      runAnimate(startAnimateArr[i])
+    }
+  })
+  function runAnimate(effectObj) {
+    effectObj.css({
+      'animation': effectObj.attr('data-an'),
+      'visibility': 'visible'
+    }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+      if ($("[data-an-depends="+ effectObj.attr('id') +"]")) {
+        runAnimate($("[data-an-depends="+ effectObj.attr('id') +"]"))
+      }
+    })
+  }
 </script>
 </body>
 </html>
