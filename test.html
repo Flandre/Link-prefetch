@@ -6,6 +6,7 @@
   <link href="css/main.css" rel="stylesheet">
   <link href="css/animate.min.css" rel="stylesheet">
   <style>
+    p{font-family: '微软雅黑','microsoft yahei', sans-serif;font-size:30px;}
   </style>
 </head>
 <body>
@@ -15,13 +16,22 @@
 
 <p class="effect" data-an="slideInLeft 1s" id="p1">这是一段文字</p>
 
-<p class="effect" data-an="slideInLeft 2s" data-an-depends="p1" id="p2">这是一段文字</p>
+<p class="effect" data-an="bounce 1s" data-an-depends="p1" id="p2">这是一段文字</p>
 
-<p class="effect" data-an="slideInLeft 3s" data-an-depends="p2" id="p3">这是一段文字</p>
+<p class="effect" data-an="flash 1s" data-an-depends="p2" id="p3">这是一段文字</p>
 
-<p class="effect" data-an="slideInLeft 4s" data-an-depends="p3">这是一段文字</p>
+<p class="effect" data-an="shake 1s" data-an-depends="p3">这是一段文字</p>
 
-<p class="effect" data-an="slideInLeft 2s" data-an-depends="p1" id="p5">这是一段文字</p>
+<p class="effect" data-an="tada 1s" data-an-depends="p1" id="p5">这是一段文字</p>
+
+
+<p class="effect" data-an="jello 1s" id="p12">这是一段文字</p>
+
+<p class="effect" data-an="wobble 1s" data-an-depends="p12" id="p22">这是一段文字</p>
+
+<p class="effect" data-an="swing 1s" data-an-depends="p22" id="p32">这是一段文字</p>
+
+<p class="effect" data-an="rubberBand 1s" data-an-depends="p32">这是一段文字</p>
 
 <button id="btn">执行</button>
 <script src="js/jquery.min.js"></script>
