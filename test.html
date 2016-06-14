@@ -21,7 +21,15 @@
 
 <p class="effect" data-an="slideInLeft 4s" data-an-depends="p3">这是一段文字</p>
 
-<botton id="btn">执行</botton>
+<p class="effect" data-an="slideInLeft 1s" id="p4">这是一段文字</p>
+
+<p class="effect" data-an="slideInLeft 2s" data-an-depends="p4" id="p5">这是一段文字</p>
+
+<p class="effect" data-an="slideInLeft 3s" data-an-depends="p5" id="p6">这是一段文字</p>
+
+<p class="effect" data-an="slideInLeft 4s" data-an-depends="p6">这是一段文字</p>
+
+<button id="btn">执行</button>
 <script src="js/jquery.min.js"></script>
 <script>
   var startAnimateArr = [];
@@ -37,7 +45,7 @@
     for (var i = 0; i < startAnimateArr.length; i++) {
       runAnimate(startAnimateArr[i])
     }
-  })
+  });
   function runAnimate(effectObj) {
     effectObj.css({
       'animation': effectObj.attr('data-an'),
