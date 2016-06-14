@@ -51,7 +51,7 @@
       'animation': effectObj.attr('data-an'),
       'visibility': 'visible'
     }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-      console.log('shikong is baka');
+      console.log('shikong is not baka');
       if (!!$("[data-an-depends="+ effectObj.attr('id') +"]")) {
         runAnimate($("[data-an-depends="+ effectObj.attr('id') +"]"))
       }else{
