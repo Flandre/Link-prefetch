@@ -57,10 +57,10 @@ function nextPage() {
       var totalPage = $('section', 'main').length;
       if (currentPage + 1 < totalPage) {
         currentPage++;
-        $('section:eq(' + currentPage + ')', 'main').css({
-          'animation':'slideInUp 1s',
-          'z-index':'999'
-        }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $('section:eq(' + currentPage + ')', 'main').addClass('activity').css({
+          'animation': 'slideInUp 1s',
+          'z-index': '999'
+        }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
           showCurrentPage(currentPage)
         });
       }
@@ -72,9 +72,9 @@ function prevPage() {
   if (currentPage > 0) {
     currentPage--;
     $('section:eq(' + currentPage + ')', 'main').css({
-      'animation':'slideInDown 1s',
-      'z-index':'999'
-    }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+      'animation': 'slideInDown 1s',
+      'z-index': '999'
+    }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
       showCurrentPage(currentPage)
     });
   }
@@ -82,8 +82,10 @@ function prevPage() {
 //显示当前页面
 function showCurrentPage(current) {
   var total = $('section', 'main').length;
-  $('section', 'main').attr('class','').attr('style','');
+  $('section', 'main').attr('class', '').attr('style', '');
   $('section:eq(' + current + ')', 'main').addClass('active');
+  //显示页面进度
+  $('.progress').css('width', (current + 1) * 100 / $('section').length + '%')
   //执行css动画序列
   animationOrder(current);
   //判断还有没有下一页,如果有则加载下一页
@@ -105,7 +107,7 @@ function showCurrentPage(current) {
 //预加载下一页
 function fetchPage(next) {
   var nextPage = $('section:eq(' + next + ')', 'main'),
-  url = nextPage.attr('data-dom');
+    url = nextPage.attr('data-dom');
   //判断页面有没有加载过
   if (!pageHash[url]) {
     getSource(url, 'html', function (data) {
@@ -178,10 +180,10 @@ function getImage(count, index) {
 }
 
 //序列化css动画
-function animationOrder(index){
+function animationOrder(index) {
   var startAnimateArr = [];
-  $('.effect').attr('style','').css('visibility', 'hidden');
-  $('.effect', 'section:eq(' + index + ')').each(function(){
+  $('.effect').attr('style', '').css('visibility', 'hidden');
+  $('.effect', 'section:eq(' + index + ')').each(function () {
     if (!$(this).attr('data-an-depends')) {
       startAnimateArr.push($(this))
     }
@@ -195,21 +197,21 @@ function runAnimate(effectObj) {
   effectObj.css({
     'animation': effectObj.attr('data-an'),
     'visibility': 'visible'
-  }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-    if (!!$("[data-an-depends="+ effectObj.attr('id') +"]")) {
-      runAnimate($("[data-an-depends="+ effectObj.attr('id') +"]"))
-    }else{
+  }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+    if (!!$("[data-an-depends=" + effectObj.attr('id') + "]")) {
+      runAnimate($("[data-an-depends=" + effectObj.attr('id') + "]"))
+    } else {
       return false;
     }
   })
 }
 //添加音乐动作
-$('.music-icon').on('click', function(){
+$('.music-icon').on('click', function () {
   event.stopPropagation();
-  if($('.music-icon').hasClass('music-icon-active')){
+  if ($('.music-icon').hasClass('music-icon-active')) {
     $('.music-icon').toggleClass('music-icon-active');
     $('#background-audio')[0].pause();
-  }else{
+  } else {
     $('.music-icon').toggleClass('music-icon-active');
     $('#background-audio')[0].play();
   }
