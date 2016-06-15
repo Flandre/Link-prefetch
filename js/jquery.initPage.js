@@ -57,11 +57,11 @@ function nextPage() {
       var totalPage = $('section', 'main').length;
       if (currentPage + 1 < totalPage) {
         currentPage++;
-        $('section:eq(' + currentPage + ')', 'main').addClass('activity').css({
+        $('section:eq(' + currentPage + ')', 'main').css({
           'animation': 'slideInUp 1s',
           'z-index': '999'
-        }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-          showCurrentPage(currentPage)
+        }).one('animationend', function(){
+          showCurrentPage(currentPage);
         });
       }
     }
@@ -74,8 +74,8 @@ function prevPage() {
     $('section:eq(' + currentPage + ')', 'main').css({
       'animation': 'slideInDown 1s',
       'z-index': '999'
-    }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-      showCurrentPage(currentPage)
+    }).one('animationend', function(){
+      showCurrentPage(currentPage);
     });
   }
 }
@@ -85,7 +85,7 @@ function showCurrentPage(current) {
   $('section', 'main').attr('class', '').attr('style', '');
   $('section:eq(' + current + ')', 'main').addClass('active');
   //显示页面进度
-  $('.progress').css('width', (current + 1) * 100 / $('section').length + '%')
+  $('.progress').css('width', (current + 1) * 100 / $('section').length + '%');
   //执行css动画序列
   animationOrder(current);
   //判断还有没有下一页,如果有则加载下一页
@@ -112,6 +112,8 @@ function fetchPage(next) {
   if (!pageHash[url]) {
     getSource(url, 'html', function (data) {
       nextPage.html(data);
+      //加载时清空当前页面的动画
+      $('.effect','section:eq(' + next + ')').css({'visibility': 'hidden','animation':''});
       //添加加载状态
       pageStatus[next] = {
         css: false,
@@ -182,7 +184,7 @@ function getImage(count, index) {
 //序列化css动画
 function animationOrder(index) {
   var startAnimateArr = [];
-  $('.effect').attr('style', '').css('visibility', 'hidden');
+  $('.effect').css({'visibility': 'hidden','animation':''});
   $('.effect', 'section:eq(' + index + ')').each(function () {
     if (!$(this).attr('data-an-depends')) {
       startAnimateArr.push($(this))
@@ -197,11 +199,9 @@ function runAnimate(effectObj) {
   effectObj.css({
     'animation': effectObj.attr('data-an'),
     'visibility': 'visible'
-  }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+  }).one('animationend', function () {
     if (!!$("[data-an-depends=" + effectObj.attr('id') + "]")) {
-      runAnimate($("[data-an-depends=" + effectObj.attr('id') + "]"))
-    } else {
-      return false;
+      runAnimate($("[data-an-depends=" + effectObj.attr('id') + "]"));
     }
   })
 }
