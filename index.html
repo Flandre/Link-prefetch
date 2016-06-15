@@ -2,35 +2,40 @@
 <html>
 <head lang="en">
   <meta charset="UTF-8">
-  <meta name="renderer" content="webkit" />
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="renderer" content="webkit"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <title></title>
   <link href="css/main.css" rel="stylesheet" type="text/css">
   <link href="css/animate.min.css" rel="stylesheet" type="text/css">
   <style id="cssFetch"></style>
 </head>
 <body>
+<header>
+  <audio id="background-audio" autoplay="true" loop="" src="sounds/background.mp3"></audio>
+  <div class="music-icon music-icon-active"></div>
+</header>
 <main>
-  <section data-dom="test/html/testDom1.html"></section>
-  <section data-dom="test/html/testDom2.html"></section>
-  <section data-dom="test/html/testDom3.html"></section>
-  <section data-dom="test/html/testDom4.html"></section>
   <!--创建等待页面-->
   <div id="loading">
     <div class="loading-box">
       <div class="loading-bg"></div>
-      <!--span>loading</span-->
     </div>
   </div>
+  <section data-dom="test/html/dom1.html"></section>
+  <section data-dom="test/html/dom2.html"></section>
+  <section data-dom="test/html/testDom1.html"></section>
+  <section data-dom="test/html/testDom2.html"></section>
+  <section data-dom="test/html/testDom3.html"></section>
+  <section data-dom="test/html/testDom4.html"></section>
 </main>
-
-
-<div class="btn-test">
-  <button id="prevBtn">上一页</button>
-  <button id="nextBtn">下一页</button>
+<footer class="page-tip-wrapper">
+  <span class="page-tip"></span>
+</footer>
+<div class="progress-bar">
+  <div class="progress"></div>
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.initPage.js"></script>
