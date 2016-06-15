@@ -1,0 +1,18 @@
+/*测试动画*/
+/**默认动画效果**/
+*{animation-timing-function: ease-out;animation-duration:1.5s;animation-fill-mode:both;}
+
+section .slip-left{display:none;}
+section.active .slip-left{display:block;animation-name:slipLeft}
+section .slip-right{display:none;}
+section.active .slip-right{display:block;animation-name:slipRight}
+
+@keyframes slipLeft{
+    from {transform:translateX(-100%);display: block}
+    to {transform:translateX(0)}
+}
+
+@keyframes slipRight{
+    from {transform:translateX(100%);display: block}
+    to {transform:translateX(0)}
+}
