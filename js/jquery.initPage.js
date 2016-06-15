@@ -28,25 +28,12 @@ function initFirstPage() {
 //添加交互
 var y1, y2;
 function pageClip() {
-  //var prevPageObj, nextPageObj;
-  //var mainHeight = $('main').height();
   var hasTouch = 'ontouchstart' in window ? true : false,
     touchStart = hasTouch ? 'touchstart' : 'mousedown',
     touchMove = hasTouch ? 'touchmove' : 'mousemove',
     touchEnd = hasTouch ? 'touchend' : 'mouseup';
   $('main')[0].addEventListener(touchStart, function (e) {
     e.preventDefault();
-    //设置前一页和后一页
-    /*if (currentPage > 0) {
-     prevPageObj = $('section:eq(' + (currentPage - 1) + ')', 'main');
-     console.log(prevPageObj);
-     prevPageObj.css({'top': -mainHeight, 'z-index': '100'});
-     }
-     if (currentPage < $('section').length - 1) {
-     nextPageObj = $('section:eq(' + (currentPage + 1) + ')', 'main');
-     nextPageObj.css({'top': mainHeight, 'z-index': '100'});
-     }*/
-
     $('main')[0].addEventListener(touchMove, touchMoveHandler);
     y1 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
   });
@@ -73,11 +60,12 @@ function nextPage() {
       var totalPage = $('section', 'main').length;
       if (currentPage + 1 < totalPage) {
         currentPage++;
-        $('section:eq(' + currentPage + ')', 'main').addClass('scroll-up');
-        setTimeout(function () {
-            showCurrentPage(currentPage)
-          }, 1000
-        )
+        $('section:eq(' + currentPage + ')', 'main').css({
+          'animation':'slideInUp 2s',
+          'z-index':'999'
+        }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+          showCurrentPage(currentPage)
+        });
       }
     }
   }
@@ -86,20 +74,18 @@ function nextPage() {
 function prevPage() {
   if (currentPage > 0) {
     currentPage--;
-    $('section:eq(' + currentPage + ')', 'main').addClass('scroll-down');
-    setTimeout(function () {
-        showCurrentPage(currentPage)
-      }, 1000
-    )
+    $('section:eq(' + currentPage + ')', 'main').css({
+      'animation':'slideInDown 2s',
+      'z-index':'999'
+    }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+      showCurrentPage(currentPage)
+    });
   }
 }
-
 //显示当前页面
 function showCurrentPage(current) {
   var total = $('section', 'main').length;
-  $('section', 'main').removeClass('scroll-up');
-  $('section', 'main').removeClass('scroll-down');
-  $('section', 'main').removeClass('active');
+  $('section', 'main').attr('class','').attr('style','');
   $('section:eq(' + current + ')', 'main').addClass('active');
   //执行css动画序列
   animationOrder(current);
@@ -121,7 +107,7 @@ function showCurrentPage(current) {
 //预加载下一页
 function fetchPage(next) {
   var nextPage = $('section:eq(' + next + ')', 'main'),
-    url = nextPage.attr('data-dom');
+  url = nextPage.attr('data-dom');
   //判断页面有没有加载过
   if (!pageHash[url]) {
     getSource(url, 'html', function (data) {
@@ -206,7 +192,7 @@ function animationOrder(index){
     runAnimate(startAnimateArr[i])
   }
 }
-
+//执行动画
 function runAnimate(effectObj) {
   effectObj.css({
     'animation': effectObj.attr('data-an'),
@@ -227,5 +213,4 @@ function getSource(url, type, func) {
     success: func
   });
 }
-
 initFirstPage();

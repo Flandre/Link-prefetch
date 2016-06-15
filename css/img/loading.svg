@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300">
+  <g>
+
+    <circle cx="150" cy="150" r="115" stroke="#DAA652" stroke-width="5" fill="url(#grad1)"></circle>
+    <use xlink:href="#tropia" x="20" y="60" stroke="#000"></use>
+    <use xlink:href="#tropia" x="148" y="60" stroke="#000"></use>
+    <use xlink:href="#beziers" x="30" y="135" stroke="#F7B47E" fill="#F7B47E" transform="scale(0.7,0.7)" filter="url(#f1)"></use>
+    <use xlink:href="#beziers" x="260" y="135" stroke="#F7B47E" fill="#F7B47E" transform="scale(0.7,0.7)" filter="url(#f1)"></use>
+    <use xlink:href="#ha" x="60" y="163" fill="#F9D497"></use>
+    <use xlink:href="#ha" x="60" y="160" fill="#673F05"></use>
+    <use xlink:href="#yue" x="88" y="-12" transform="rotate(24)" fill="#673F05"></use>
+    <use xlink:href="#yue" x="145" y="112" transform="rotate(-24)" fill="#673F05"></use>
+
+    <animateTransform attributeName="transform" begin="0s" dur="2s" type="rotate" from="0 160 160" to="360 160 160" repeatCount="indefinite"/>
+  </g>
+
+  <defs>
+    <filter id="f1" x="0" y="0">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" />
+    </filter>
+  </defs>
+  <defs>70
+    <g id="yue">
+      <path d="M0,35 C0,8 42,8 42,35 C28,18 14,18 0,35 z"></path>
+    </g>
+  </defs>
+  <defs>
+    <g id="ha">
+      <path d="M0,0 C5,94 175,94 180,0 C165,85 15,85 0,0 z"></path>
+    </g>
+  </defs>
+  <defs>
+    <g id="tropia">
+      <use xlink:href="#beziers" fill="#FFF" stroke="#FFF" x="0" y="0"></use>
+      <circle cx="40" cy="36" r="10" stroke-width="0" fill="#6C421B"></circle>
+      <use xlink:href="#beziers" fill="none" stroke="#D0BD66" x="0" y="0"></use>
+    </g>
+  </defs>
+  <defs>
+    <g id="beziers">
+      <path stroke-width="5"  d="M30,30 C15,32 15,54 30,50 C45,45 65,45 100,50 C115,54 115,32 100,30 C85,25 45,25 30,30 z" />
+    </g>
+  </defs>
+  <defs>
+    <radialGradient id="grad1" cx="0.5" cy="0.5" r="0.5" fx="0.4" fy="0.4">
+      <stop offset="0" style="stop-color:#FFE284; stop-opacity:1" />
+      <stop offset="0.4" style="stop-color:#FFE284; stop-opacity:1" />
+      <stop offset="1" style="stop-color:#e9ac4a;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+</svg>
