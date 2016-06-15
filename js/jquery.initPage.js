@@ -49,6 +49,10 @@ function pageClip() {
 }
 /*翻页事件*/
 //向下翻页
+var animateEnd = 'animationend' in window ? 'animationend' :
+    'webkitAnimationEnd' in window ? 'webkitAnimationEnd' :
+    'mozAnimationEnd' in window ? 'mozAnimationEnd' :
+    'oanimationend' in window ? 'oanimationend' : 'animationend';
 function nextPage() {
   console.log(JSON.stringify(pageStatus));
   //如果下一页没加载完则阻止向下翻页
@@ -60,7 +64,7 @@ function nextPage() {
         $('section:eq(' + currentPage + ')', 'main').css({
           'animation': 'slideInUp 1s',
           'z-index': '999'
-        }).one('animationend', function(){
+        }).one(animateEnd, function () {
           showCurrentPage(currentPage);
         });
       }
@@ -74,13 +78,14 @@ function prevPage() {
     $('section:eq(' + currentPage + ')', 'main').css({
       'animation': 'slideInDown 1s',
       'z-index': '999'
-    }).one('animationend', function(){
+    }).one(animateEnd, function () {
       showCurrentPage(currentPage);
     });
   }
 }
 //显示当前页面
 function showCurrentPage(current) {
+  console.log('===')
   var total = $('section', 'main').length;
   $('section', 'main').attr('class', '').attr('style', '');
   $('section:eq(' + current + ')', 'main').addClass('active');
@@ -113,7 +118,7 @@ function fetchPage(next) {
     getSource(url, 'html', function (data) {
       nextPage.html(data);
       //加载时清空当前页面的动画
-      $('.effect','section:eq(' + next + ')').css({'visibility': 'hidden','animation':''});
+      $('.effect', 'section:eq(' + next + ')').css({'visibility': 'hidden', 'animation': ''});
       //添加加载状态
       pageStatus[next] = {
         css: false,
@@ -184,7 +189,7 @@ function getImage(count, index) {
 //序列化css动画
 function animationOrder(index) {
   var startAnimateArr = [];
-  $('.effect').css({'visibility': 'hidden','animation':''});
+  $('.effect').css({'visibility': 'hidden', 'animation': ''});
   $('.effect', 'section:eq(' + index + ')').each(function () {
     if (!$(this).attr('data-an-depends')) {
       startAnimateArr.push($(this))
@@ -199,7 +204,7 @@ function runAnimate(effectObj) {
   effectObj.css({
     'animation': effectObj.attr('data-an'),
     'visibility': 'visible'
-  }).one('animationend', function () {
+  }).one(animateEnd, function () {
     if (!!$("[data-an-depends=" + effectObj.attr('id') + "]")) {
       runAnimate($("[data-an-depends=" + effectObj.attr('id') + "]"));
     }
