@@ -35,7 +35,6 @@ function pageClip() {
     y1 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
   });
   $('main')[0].addEventListener(touchEnd, function (e) {
-    alert(1);
     e.preventDefault();
     $('main')[0].removeEventListener(touchMove, touchMoveHandler);
     if (y2 > y1) {
@@ -51,9 +50,10 @@ function pageClip() {
 /*翻页事件*/
 //向下翻页
 function nextPage() {
-  console.log(JSON.stringify(pageStatus));
+  alert(1);
   //如果下一页没加载完则阻止向下翻页
   if (pageStatus[currentPage + 1]) {
+    alert(2);
     if (pageStatus[currentPage + 1].css && pageStatus[currentPage + 1].js && !pageStatus[currentPage + 1].imgRest) {
       var totalPage = $('section', 'main').length;
       if (currentPage + 1 < totalPage) {
