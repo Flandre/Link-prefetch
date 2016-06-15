@@ -35,6 +35,7 @@ function pageClip() {
     y1 = hasTouch ? e.targetTouches[0].pageY : e.clientY;
   });
   $('main')[0].addEventListener(touchEnd, function (e) {
+    alert(1);
     e.preventDefault();
     $('main')[0].removeEventListener(touchMove, touchMoveHandler);
     if (y2 > y1) {
