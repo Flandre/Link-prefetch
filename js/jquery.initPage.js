@@ -195,16 +195,30 @@ function getImage(count, index) {
 
 //序列化css动画
 function animationOrder(index){
-  $('.animation-element').attr('class','animation-element');
-  var animationGroup = $('.animation-element', 'section:eq(' + index + ')');
-  //console.log(animationGroup.length)
-  for(var i = 0; i < animationGroup.length; i ++){
-    var domQuery = $(animationGroup[i]);
-    domQuery.css('animation-delay', 1.5 * (domQuery.attr('data-animation-level') - 1) + 's');
-    domQuery.addClass(domQuery.attr('data-animation'))
+  var startAnimateArr = [];
+  $('.effect').attr('style','').css('visibility', 'hidden');
+  $('.effect', 'section:eq(' + index + ')').each(function(){
+    if (!$(this).attr('data-an-depends')) {
+      startAnimateArr.push($(this))
+    }
+  });
+  for (var i = 0; i < startAnimateArr.length; i++) {
+    runAnimate(startAnimateArr[i])
   }
 }
 
+function runAnimate(effectObj) {
+  effectObj.css({
+    'animation': effectObj.attr('data-an'),
+    'visibility': 'visible'
+  }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+    if (!!$("[data-an-depends="+ effectObj.attr('id') +"]")) {
+      runAnimate($("[data-an-depends="+ effectObj.attr('id') +"]"))
+    }else{
+      return false;
+    }
+  })
+}
 //发起ajax请求
 function getSource(url, type, func) {
   $.get({
