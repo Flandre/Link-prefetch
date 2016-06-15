@@ -21,9 +21,6 @@ function initFirstPage() {
     }
   })();
   pageClip();
-  //添加向下翻页
-  $('#nextBtn').on('click', nextPage);
-  $('#prevBtn').on('click', prevPage);
 }
 //添加交互
 var y1, y2;
@@ -61,7 +58,7 @@ function nextPage() {
       if (currentPage + 1 < totalPage) {
         currentPage++;
         $('section:eq(' + currentPage + ')', 'main').css({
-          'animation':'slideInUp 2s',
+          'animation':'slideInUp 1s',
           'z-index':'999'
         }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
           showCurrentPage(currentPage)
@@ -75,7 +72,7 @@ function prevPage() {
   if (currentPage > 0) {
     currentPage--;
     $('section:eq(' + currentPage + ')', 'main').css({
-      'animation':'slideInDown 2s',
+      'animation':'slideInDown 1s',
       'z-index':'999'
     }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
       showCurrentPage(currentPage)
@@ -205,6 +202,16 @@ function runAnimate(effectObj) {
     }
   })
 }
+//添加音乐动作
+$('.music-icon').on('click', function(){
+  if($('.music-icon').hasClass('music-icon-active')){
+    $('.music-icon').toggleClass('music-icon-active');
+    $('#background-audio')[0].pause();
+  }else{
+    $('.music-icon').toggleClass('music-icon-active');
+    $('#background-audio')[0].play();
+  }
+});
 //发起ajax请求
 function getSource(url, type, func) {
   $.get({

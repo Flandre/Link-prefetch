@@ -13,25 +13,22 @@
   <style id="cssFetch"></style>
 </head>
 <body>
+<header>
+  <audio id="background-audio" autoplay="true" loop="" src="sounds/background.mp3"></audio>
+  <div class="music-icon music-icon-active"></div>
+</header>
 <main>
-  <section data-dom="test/html/testDom1.html"></section>
-  <section data-dom="test/html/testDom2.html"></section>
-  <section data-dom="test/html/testDom3.html"></section>
-  <section data-dom="test/html/testDom4.html"></section>
   <!--创建等待页面-->
   <div id="loading">
     <div class="loading-box">
       <div class="loading-bg"></div>
-      <!--span>loading</span-->
     </div>
   </div>
+  <section data-dom="test/html/testDom1.html"></section>
+  <section data-dom="test/html/testDom2.html"></section>
+  <section data-dom="test/html/testDom3.html"></section>
+  <section data-dom="test/html/testDom4.html"></section>
 </main>
-
-
-<div class="btn-test">
-  <button id="prevBtn">上一页</button>
-  <button id="nextBtn">下一页</button>
-</div>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.initPage.js"></script>
 </body>
