@@ -50,10 +50,8 @@ function pageClip() {
 /*翻页事件*/
 //向下翻页
 function nextPage() {
-  alert(1);
   //如果下一页没加载完则阻止向下翻页
   if (pageStatus[currentPage + 1]) {
-    alert(2);
     if (pageStatus[currentPage + 1].css && pageStatus[currentPage + 1].js && !pageStatus[currentPage + 1].imgRest) {
       var totalPage = $('section', 'main').length;
       if (currentPage + 1 < totalPage) {
