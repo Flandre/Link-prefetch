@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="921032e4-bdd5-4155-9016-a1b8e3cb1024" name="!changes.default.changelist.name!" comment="">
-      <change type="DELETED" beforePath="E:\github\Link-prefetch\.idea\.name" afterPath="" />
-      <change type="DELETED" beforePath="E:\github\Link-prefetch\.idea\Link-prefetch.iml" afterPath="" />
-      <change type="DELETED" beforePath="E:\github\Link-prefetch\.idea\encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\github\Link-prefetch\.idea\jsLibraryMappings.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\github\Link-prefetch\.idea\misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\github\Link-prefetch\.idea\modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\github\Link-prefetch\.idea\vcs.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Link-prefetch.iws" />
