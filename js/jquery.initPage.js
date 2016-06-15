@@ -64,7 +64,7 @@ function nextPage() {
         $('section:eq(' + currentPage + ')', 'main').css({
           'animation': 'slideInUp 1s',
           'z-index': '999'
-        }).one(animateEnd, function () {
+        }).on(animateEnd, function () {
           showCurrentPage(currentPage);
         });
       }
@@ -78,14 +78,13 @@ function prevPage() {
     $('section:eq(' + currentPage + ')', 'main').css({
       'animation': 'slideInDown 1s',
       'z-index': '999'
-    }).one(animateEnd, function () {
+    }).on(animateEnd, function () {
       showCurrentPage(currentPage);
     });
   }
 }
 //显示当前页面
 function showCurrentPage(current) {
-  console.log('===')
   var total = $('section', 'main').length;
   $('section', 'main').attr('class', '').attr('style', '');
   $('section:eq(' + current + ')', 'main').addClass('active');
@@ -204,7 +203,7 @@ function runAnimate(effectObj) {
   effectObj.css({
     'animation': effectObj.attr('data-an'),
     'visibility': 'visible'
-  }).one(animateEnd, function () {
+  }).on(animateEnd, function () {
     if (!!$("[data-an-depends=" + effectObj.attr('id') + "]")) {
       runAnimate($("[data-an-depends=" + effectObj.attr('id') + "]"));
     }
