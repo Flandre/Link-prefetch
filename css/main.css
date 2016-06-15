@@ -215,3 +215,9 @@ main > section > div {
         opacity: 0
     }
 }
+
+.p3 {
+    background: #66ccff url(img/p3_bg.png) no-repeat center center;
+    background-size: cover;
+}
+.p3 h2{padding:30px;color:#fff;}
