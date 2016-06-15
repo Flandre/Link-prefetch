@@ -91,6 +91,7 @@ function showCurrentPage(current) {
     fetchPage(current + 1)
   }
   var cssUrl = $('section:eq(' + current + ') div:first', 'main').attr('data-css');
+  $('#cssFetch').empty();
   if (cssHash[cssUrl]) {
     $('#cssFetch').html(cssHash[cssUrl].cssBody)
   }
@@ -204,6 +205,7 @@ function runAnimate(effectObj) {
 }
 //添加音乐动作
 $('.music-icon').on('click', function(){
+  event.stopPropagation();
   if($('.music-icon').hasClass('music-icon-active')){
     $('.music-icon').toggleClass('music-icon-active');
     $('#background-audio')[0].pause();
