@@ -1,9 +1,10 @@
 # README
 
+[测试效果](http://flandre.github.io/Link-prefetch/index.html)    [动画效果](https://flandre.github.io/animate.css/)
 
-##index文件编写
+###index文件编写
 
-index文件编写如下
+index文件模板如下
 
 ```HTML
 <!DOCTYPE html>
@@ -48,7 +49,32 @@ index文件编写如下
 
 ```
 
-###[测试效果](http://flandre.github.io/Link-prefetch/index.html)
+`main.css`中配置了页面使用的基本信息，用户可以去修改或者覆盖
 
-###[动画效果](https://flandre.github.io/animate.css/)
+`animate.min.css`用于显示页面中使用的动画，具体可参考[动画效果](https://flandre.github.io/animate.css/)
+
+style用于存放某些页面按需加载的css内容
+
+```HTML
+	<style id="cssFetch"></style>
+```
+
+header中用于配置页面中音乐，如果不配置则不显示音乐
+
+```HTML
+    <header>
+      <audio id="background-audio" autoplay="true" loop="" src="sounds/background.mp3"></audio>
+      <div class="music-icon music-icon-active"></div>
+    </header>
+```
+
+`main`区域用于配置主要显示信息，其中Loading用于配置页面等待动画，可以在main.css中配置
+
+```HTML
+      <div id="loading">
+        <div class="loading-box">
+          <div class="loading-bg"></div>
+        </div>
+      </div>
+```
 
