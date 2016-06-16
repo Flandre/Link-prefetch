@@ -64,7 +64,7 @@ function nextPage() {
         $('section:eq(' + currentPage + ')', 'main').css({
           'animation': 'slideInUp 1s',
           'z-index': '999'
-        }).one('webkitAnimationEnd', function () {
+        }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
           showCurrentPage(currentPage);
         });
       }
@@ -78,7 +78,7 @@ function prevPage() {
     $('section:eq(' + currentPage + ')', 'main').css({
       'animation': 'slideInDown 1s',
       'z-index': '999'
-    }).one('webkitAnimationEnd', function () {
+    }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
       showCurrentPage(currentPage);
     });
   }
@@ -204,7 +204,7 @@ function runAnimate(effectObj) {
   effectObj.css({
     'animation': effectObj.attr('data-an'),
     'visibility': 'visible'
-  }).one('webkitAnimationEnd', function () {
+  }).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
     if (!!$("[data-an-depends=" + effectObj.attr('id') + "]")) {
       runAnimate($("[data-an-depends=" + effectObj.attr('id') + "]"));
     }
