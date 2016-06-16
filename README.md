@@ -4,7 +4,7 @@
 
 ###index文件编写
 
-index文件模板如下
+index文件模板如下：
 
 ```HTML
 <!DOCTYPE html>
@@ -49,13 +49,13 @@ index文件模板如下
 
 ```
 
-`main.css`中配置了页面使用的基本信息，用户可以去修改或者覆盖
+`main.css`中配置了页面使用的基本信息，用户可以去修改或者覆盖。
 
-`animate.min.css`用于显示页面中使用的动画，具体可参考[动画效果](https://flandre.github.io/animate.css/)
+`animate.min.css`用于显示页面中使用的动画，具体可参考[动画效果](https://flandre.github.io/animate.css/)。
 
-`<style id="cssFetch"></style>`用于存放某些页面按需加载的css内容
+`<style id="cssFetch"></style>`用于存放某些页面按需加载的css内容。
 
-`header`中用于配置页面中音乐，如果不配置则不显示音乐
+`header`中用于配置页面中音乐，如果不配置则不显示音乐。
 
 ```HTML
     <header>
@@ -64,7 +64,7 @@ index文件模板如下
     </header>
 ```
 
-`main`区域用于配置主要显示信息，其中Loading用于配置页面等待动画，可以在main.css中配置
+`main`区域用于配置主要显示信息，其中Loading用于配置页面等待动画，可以在main.css中配置使用的图片或者SVG。
 
 ```HTML
       <div id="loading">
@@ -74,3 +74,4 @@ index文件模板如下
       </div>
 ```
 
+`<section>`用于配置主要显示的页面，每个`<section>`都是100%的宽高，属性`data-dom`用于配置具体的显示页面。
