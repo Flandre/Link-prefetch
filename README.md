@@ -53,13 +53,9 @@ index文件模板如下
 
 `animate.min.css`用于显示页面中使用的动画，具体可参考[动画效果](https://flandre.github.io/animate.css/)
 
-style用于存放某些页面按需加载的css内容
+`<style id="cssFetch"></style>`用于存放某些页面按需加载的css内容
 
-```HTML
-	<style id="cssFetch"></style>
-```
-
-header中用于配置页面中音乐，如果不配置则不显示音乐
+`header`中用于配置页面中音乐，如果不配置则不显示音乐
 
 ```HTML
     <header>
