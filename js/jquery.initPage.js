@@ -64,7 +64,7 @@ function nextPage() {
         $('section:eq(' + currentPage + ')', 'main').css({
           'animation': 'slideInUp 1s',
           'z-index': '999'
-        }).one('mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+        }).one('animationend', function () {
           showCurrentPage(currentPage);
         });
       }
@@ -78,7 +78,7 @@ function prevPage() {
     $('section:eq(' + currentPage + ')', 'main').css({
       'animation': 'slideInDown 1s',
       'z-index': '999'
-    }).one('mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+    }).one('animationend', function () {
       showCurrentPage(currentPage);
     });
   }
