@@ -205,6 +205,9 @@ function runAnimate(effectObj) {
     'animation': effectObj.attr('data-an'),
     'visibility': 'visible'
   }).one('mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+    if(effectObj.attr('data-an-finished') == 'hidden'){
+      effectObj.css('visibility','hidden')
+    }
     if (!!$("[data-an-depends=" + effectObj.attr('id') + "]")) {
       runAnimate($("[data-an-depends=" + effectObj.attr('id') + "]"));
     }
