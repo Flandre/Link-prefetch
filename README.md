@@ -137,4 +137,4 @@ index文件模板如下：
 
 某些低端手机（比如我的手机）浏览器对`rotate`类动画支持不是很好，建议避免使用。
 
-如果`animationend`监听同时使用`webkitAnimationEnd`和`animationend`则chrome浏览器会执行两次，手机及其他浏览器则无问题。
+如果`animationend`监听同时使用`webkitAnimationEnd`和`animationend`则chrome浏览器会执行两次，手机及其他浏览器则无问题，但是手机默认浏览器仅支持`webkitAnimationEnd`事件。
