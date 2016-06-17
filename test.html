@@ -35,7 +35,7 @@
 
 <button id="btn">执行</button>
 <script src="js/jquery.min.js"></script>
-<script>
+<!--script>
   var startAnimateArr = [];
   $('.effect').each(function () {
     //预处理效果
@@ -63,6 +63,11 @@
       }
     })
   }
+</script-->
+<script>
+  $('#btn').one('click click',function(){
+    alert(1);
+  })
 </script>
 </body>
 </html>

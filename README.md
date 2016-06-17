@@ -132,3 +132,9 @@ index文件模板如下：
 ###图片样式
 
 所有图片均有`max-width: 100%;height: auto`的样式，所以当图片小于显示宽度的时候则按比例缩放。
+
+##目前存在的问题
+
+某些低端手机（比如我的手机）浏览器对`rotate`类动画支持不是很好，建议避免使用。
+
+如果`animationend`监听同时使用`webkitAnimationEnd`和`animationend`则chrome浏览器会执行两次，手机及其他浏览器则无问题。
